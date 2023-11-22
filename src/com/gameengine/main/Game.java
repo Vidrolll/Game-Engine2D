@@ -1,12 +1,13 @@
 package com.gameengine.main;
 
+import com.gameengine.main.console.Console;
 import com.gameengine.main.ui.MainWindow;
 import com.gameengine.main.ui.RenderHandler;
-import com.gameengine.main.ui.camera.Camera;
+import com.gameengine.main.util.RendererVariables;
+import com.gameengine.main.util.Updater;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.nio.Buffer;
 
 public class Game extends Canvas implements Runnable {
     private boolean running;
@@ -15,10 +16,14 @@ public class Game extends Canvas implements Runnable {
     Thread thread;
 
     RenderHandler rh;
+    Updater up;
 
     public Game(String gameName) {
         this.gameName = gameName;
         rh = new RenderHandler(this);
+        up = new Updater();
+        new Console();
+        RendererVariables.updateHints();
     }
 
     @Override
@@ -55,7 +60,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void update() {
-
+        RendererVariables.updateHints();
     }
     public void render() {
         BufferStrategy bs = this.getBufferStrategy();
@@ -64,9 +69,11 @@ public class Game extends Canvas implements Runnable {
             return;
         }
         Graphics2D g = (Graphics2D)bs.getDrawGraphics();
+        g.setRenderingHints(RendererVariables.RENDERING_HINTS);
         rh.render(g);
         g.dispose();
         g = (Graphics2D)bs.getDrawGraphics();
+        g.setRenderingHints(RendererVariables.RENDERING_HINTS);
         drawGUI(g);
         g.dispose();
         bs.show();
@@ -75,6 +82,10 @@ public class Game extends Canvas implements Runnable {
     public  void drawBackground(Graphics2D g) {}
     public  void drawForeground(Graphics2D g) {}
     public  void drawGUI(Graphics2D g) {}
+
+    public Updater getUpdater() {
+        return up;
+    }
 
     public void createWindow(int width, int height) {
         window = new MainWindow(gameName,this,width,height);

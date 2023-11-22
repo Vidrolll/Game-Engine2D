@@ -8,6 +8,10 @@ public class Vector2D {
         this.y = y;
     }
 
+    public Vector2D() {
+        this(0, 0);
+    }
+
     public float getX() {
         return x;
     }
