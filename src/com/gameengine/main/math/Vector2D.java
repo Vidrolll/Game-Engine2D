@@ -1,4 +1,4 @@
-package math;
+package com.gameengine.main.math;
 
 public class Vector2D {
     protected float x, y;
