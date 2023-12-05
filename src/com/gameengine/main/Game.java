@@ -8,6 +8,8 @@ import com.gameengine.main.util.Updater;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public class Game extends Canvas implements Runnable {
     private boolean running;
@@ -23,9 +25,14 @@ public class Game extends Canvas implements Runnable {
         this.gameName = gameName;
         rh = new RenderHandler(this);
         rv = new RendererVariables();
-        up = new Updater();
+        up = new Updater(this);
         new Console();
         rv.updateHints();
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface Version {
+        String version() default "1.0";
     }
 
     @Override

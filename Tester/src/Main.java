@@ -5,14 +5,14 @@ import java.awt.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
+@Game.Version(version = "0.1")
 public class Main extends Game {
     public Main(String gameName) {
         super(gameName);
         createWindow(800, 600);
         start();
         RendererVariables.ANTIALIASING = RenderingHints.VALUE_ANTIALIAS_ON;
-        getUpdater().setURL("https://github.com/Vidrolll/Game-Engine2D/releases/download/testrelease/Game.Engine.jar");
-        getUpdater().setVerPath("https://github.com/Vidrolll/Game-Engine2D/raw/master/res/ver.txt");
+        getUpdater().setURL("https://github.com/Vidrolll/Game-Engine2D/releases/latest/");
         getUpdater().checkForUpdates();
     }
 
