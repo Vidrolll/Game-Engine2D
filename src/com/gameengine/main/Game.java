@@ -16,14 +16,16 @@ public class Game extends Canvas implements Runnable {
     Thread thread;
 
     RenderHandler rh;
+    RendererVariables rv;
     Updater up;
 
     public Game(String gameName) {
         this.gameName = gameName;
         rh = new RenderHandler(this);
+        rv = new RendererVariables();
         up = new Updater();
         new Console();
-        RendererVariables.updateHints();
+        rv.updateHints();
     }
 
     @Override
@@ -60,7 +62,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void update() {
-        RendererVariables.updateHints();
+        rv.updateHints();
     }
     public void render() {
         BufferStrategy bs = this.getBufferStrategy();

@@ -1,18 +1,28 @@
 package com.gameengine.main.util;
 
-import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.util.Scanner;
 
 public class Updater {
     private String fileURL;
     private String outputPath;
+    private String verPath;
 
     public void checkForUpdates() {
         if (fileURL == null) {
             System.err.println("Update link not found!");
             return;
+        }
+        try {
+            InputStream ver = new BufferedInputStream(new URL(verPath).openStream());
+            Scanner scan1 = new Scanner(ver);
+            Scanner scan2 = new Scanner(new File("res/ver.txt"));
+            while (scan1.hasNext()) {
+                if (scan1.next().equals(scan2.next())) return;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         try (BufferedInputStream in = new BufferedInputStream(new URL(fileURL).openStream());
              FileOutputStream fileOutputStream = new FileOutputStream(outputPath + "update.jar")) {
@@ -30,6 +40,9 @@ public class Updater {
         this.fileURL = URL;
     }
 
+    public void setVerPath(String verPath) {
+        this.verPath = verPath;
+    }
     public void setOutput(String outputPath) {
         this.outputPath = outputPath;
     }

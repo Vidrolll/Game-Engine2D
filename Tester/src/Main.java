@@ -12,6 +12,7 @@ public class Main extends Game {
         start();
         RendererVariables.ANTIALIASING = RenderingHints.VALUE_ANTIALIAS_ON;
         getUpdater().setURL("https://github.com/Vidrolll/Game-Engine2D/raw/master/Game%20Engine.jar");
+        getUpdater().setVerPath("https://github.com/Vidrolll/Game-Engine2D/raw/master/version/ver.txt");
         getUpdater().checkForUpdates();
     }
 

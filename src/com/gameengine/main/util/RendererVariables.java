@@ -23,8 +23,8 @@ public class RendererVariables {
     public static Object TEXT_LCD_CONTRAST = 160;
     private static Camera cam;
 
-    public static void updateHints() {
-        RENDERING_HINTS.clear();
+    public RendererVariables() {
+        cam = new Camera();
         RENDERING_HINTS.put(RenderingHints.KEY_ANTIALIASING, ANTIALIASING);
         RENDERING_HINTS.put(RenderingHints.KEY_ALPHA_INTERPOLATION, ALPHA_INTERPOLATION);
         RENDERING_HINTS.put(RenderingHints.KEY_COLOR_RENDERING, COLOR_RENDERING);
@@ -35,6 +35,10 @@ public class RendererVariables {
         RENDERING_HINTS.put(RenderingHints.KEY_STROKE_CONTROL, STROKE_CONTROL);
         RENDERING_HINTS.put(RenderingHints.KEY_TEXT_ANTIALIASING, TEXT_ANTIALIASING);
         RENDERING_HINTS.put(RenderingHints.KEY_TEXT_LCD_CONTRAST, TEXT_LCD_CONTRAST);
+    }
+
+    public void updateHints() {
+        //RENDERING_HINTS.clear();
     }
 
     public static Camera getCam() {
