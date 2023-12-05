@@ -1,5 +1,7 @@
 package com.gameengine.main.util;
 
+import com.gameengine.main.console.Console;
+
 import java.io.*;
 import java.net.URL;
 import java.util.Scanner;
@@ -18,12 +20,13 @@ public class Updater {
             InputStream ver = new BufferedInputStream(new URL(verPath).openStream());
             Scanner scan1 = new Scanner(ver);
             Scanner scan2 = new Scanner(new File("res/ver.txt"));
-            while (scan1.hasNext()) {
-                if (scan1.next().equals(scan2.next())) return;
-            }
+            if (scan1.next().equals(scan2.next())) return;
+            scan1.close();
+            scan2.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        Console.log("test");
         try (BufferedInputStream in = new BufferedInputStream(new URL(fileURL).openStream());
              FileOutputStream fileOutputStream = new FileOutputStream(outputPath + "update.jar")) {
             byte[] dataBuffer = new byte[1024];
@@ -34,6 +37,7 @@ public class Updater {
         } catch (IOException e) {
             // handle exception
         }
+        Console.log("test");
     }
 
     public void setURL(String URL) {
